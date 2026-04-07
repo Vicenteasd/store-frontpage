@@ -80,7 +80,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                       <button
                         key={idx}
                         onClick={() => setCurrentImageIndex(idx)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
+                        className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${
                           idx === currentImageIndex ? 'w-8 bg-white' : 'w-2 bg-white/40'
                         }`}
                       />
@@ -89,13 +89,13 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                   
                   <button
                     onClick={(e) => { e.stopPropagation(); prevImage(); }}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-2 text-white backdrop-blur-md transition-colors hover:bg-white/40"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white/20 p-2 text-white backdrop-blur-md transition-colors hover:bg-white/40"
                   >
                     <ChevronLeft size={24} />
                   </button>
                   <button
                     onClick={(e) => { e.stopPropagation(); nextImage(); }}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/20 p-2 text-white backdrop-blur-md transition-colors hover:bg-white/40"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer rounded-full bg-white/20 p-2 text-white backdrop-blur-md transition-colors hover:bg-white/40"
                   >
                     <ChevronRight size={24} />
                   </button>
@@ -158,7 +158,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
               </div>
 
               <div className="mt-12">
-                <button className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-ink py-5 text-sm font-semibold text-brand-bg transition-all hover:bg-brand-accent active:scale-[0.98]">
+                <button className="group flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-brand-ink py-5 text-sm font-semibold text-brand-bg transition-all hover:bg-brand-accent active:scale-[0.98]">
                   <ShoppingBag size={18} />
                   Consultar sobre el artículo
                   <motion.span

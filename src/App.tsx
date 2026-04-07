@@ -7,13 +7,14 @@ import ItemCard from './components/ItemCard';
 import ItemModal from './components/ItemModal';
 import About from './components/About';
 import Contact from './components/Contact';
-import { Filter } from 'lucide-react';
+import { Filter, X } from 'lucide-react';
 
 export default function App() {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState('Galería');
+  const [activeStatus, setActiveStatus] = useState<'todos' | 'disponible' | 'reservado' | 'vendido'>('todos');
 
   const categories = [...new Set(ITEMS.flatMap((item) => item.categories))];
   
@@ -22,7 +23,15 @@ export default function App() {
                            item.categories.some(cat => activeCategories.includes(cat));
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          item.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+    
+    let matchesStatus = true;
+    if (activeStatus === 'disponible') {
+      matchesStatus = !item.status || item.status === 'disponible';
+    } else if (activeStatus !== 'todos') {
+      matchesStatus = item.status === activeStatus;
+    }
+    
+    return matchesCategory && matchesSearch && matchesStatus;
   });
 
   const toggleCategory = (category: string) => {
@@ -76,39 +85,60 @@ export default function App() {
                 </motion.div>
               </header>
 
-              {/* Filters */}
-              <div className="mb-12 flex flex-wrap items-center justify-between gap-6">
-                <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
-                  <button
-                    onClick={() => toggleCategory('All')}
-                    className={`whitespace-nowrap rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
-                      activeCategories.length === 0
-                        ? 'bg-brand-ink text-brand-bg shadow-lg shadow-brand-ink/20'
-                        : 'bg-brand-card text-brand-ink/40 hover:bg-brand-muted hover:text-brand-ink'
-                    }`}
-                  >
-                    Todos
-                  </button>
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => toggleCategory(category)}
-                      className={`whitespace-nowrap rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
-                        activeCategories.includes(category)
-                          ? 'bg-brand-ink text-brand-bg shadow-lg shadow-brand-ink/20'
-                          : 'bg-brand-card text-brand-ink/40 hover:bg-brand-muted hover:text-brand-ink'
-                      }`}
-                    >
-                      {category}
-                    </button>
-                  ))}
+                {/* Filters */}
+                <div className="mb-12 space-y-6">
+                  <div className="flex flex-wrap items-center justify-between gap-6">
+                    <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+                      <button
+                        onClick={() => toggleCategory('All')}
+                        className={`cursor-pointer whitespace-nowrap rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
+                          activeCategories.length === 0
+                            ? 'bg-brand-ink text-brand-bg shadow-lg shadow-brand-ink/20'
+                            : 'bg-brand-card text-brand-ink/40 hover:bg-brand-muted hover:text-brand-ink'
+                        }`}
+                      >
+                        Todas las Categorías
+                      </button>
+                      {categories.map((category) => (
+                        <button
+                          key={category}
+                          onClick={() => toggleCategory(category)}
+                          className={`cursor-pointer flex items-center gap-2 whitespace-nowrap rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
+                            activeCategories.includes(category)
+                              ? 'bg-brand-ink text-brand-bg shadow-lg shadow-brand-ink/20'
+                              : 'bg-brand-card text-brand-ink/40 hover:bg-brand-muted hover:text-brand-ink'
+                          }`}
+                        >
+                          {category}
+                          {activeCategories.includes(category) && (
+                            <X size={10} className="opacity-60" strokeWidth={3} />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 border-t border-brand-border pt-6">
+                    <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">
+                      <Filter size={12} /> Estado:
+                    </span>
+                    <div className="flex gap-2">
+                      {(['todos', 'disponible', 'reservado', 'vendido'] as const).map((status) => (
+                        <button
+                          key={status}
+                          onClick={() => setActiveStatus(status)}
+                          className={`cursor-pointer rounded-full border px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-all ${
+                            activeStatus === status
+                              ? 'border-brand-accent bg-brand-accent/10 text-brand-accent'
+                              : 'border-brand-border bg-brand-card text-brand-ink/40 hover:border-brand-accent/50 hover:text-brand-ink'
+                          }`}
+                        >
+                          {status}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                
-                <button className="flex items-center gap-2 rounded-full border border-brand-border bg-brand-card px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-ink transition-colors hover:bg-brand-muted">
-                  <Filter size={14} />
-                  Filtrar
-                </button>
-              </div>
 
               {/* Grid */}
               <motion.div 
@@ -133,6 +163,7 @@ export default function App() {
                     onClick={() => {
                       setActiveCategories([]);
                       setSearchQuery('');
+                      setActiveStatus('todos');
                     }}
                     className="mt-4 text-xs font-bold uppercase tracking-widest text-brand-accent underline underline-offset-4"
                   >

@@ -146,7 +146,7 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
                     setCurrentPage(item);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`text-left text-sm font-bold uppercase tracking-[0.2em] transition-colors hover:text-brand-accent ${
+                  className={`cursor-pointer text-left text-sm font-bold uppercase tracking-[0.2em] transition-colors hover:text-brand-accent ${
                     currentPage === item ? 'text-brand-accent' : 'text-brand-ink/60'
                   }`}
                 >
