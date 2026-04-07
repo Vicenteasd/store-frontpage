@@ -135,10 +135,10 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                   <div className="grid grid-cols-2 gap-8">
                     <div>
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">
-                        Detalles del estado
+                        Curador
                       </h4>
-                      <p className="mt-2 text-sm font-medium text-brand-ink">
-                        {item.condition} - Bien mantenido
+                      <p className="mt-2 font-serif text-lg italic text-brand-accent">
+                        {item.curator || 'S. Core'}
                       </p>
                     </div>
                     <div>

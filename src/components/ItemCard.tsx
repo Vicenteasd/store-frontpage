@@ -52,6 +52,9 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
             <h3 className="mt-1 text-xl font-medium leading-tight text-brand-ink">
               {item.title}
             </h3>
+            <p className="mt-1 text-[10px] italic text-brand-ink/40">
+              Curado por {item.curator || 'S. Core'}
+            </p>
           </div>
           <p className="text-lg font-serif font-semibold text-brand-accent">
             {item.price.toLocaleString()}€

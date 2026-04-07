@@ -9,7 +9,8 @@ export const ITEMS: Item[] = [
     price: 0,
     images: ['https://drive.google.com/thumbnail?id=1fTr3a7Z53_j6i_slcgY8jCUH6-bcJZUv&sz=w1200'],
     categories: ['Archivo', 'Pokemon'],
-    status: 'reservado'
+    status: 'reservado',
+    curator: 'S. Core'
   },
   {
     id: '2',
@@ -19,7 +20,8 @@ export const ITEMS: Item[] = [
     price: 0,
     images: ['https://drive.google.com/thumbnail?id=1HDmc7jd4aE0KIHKXRpHoOYjzUbiaj-iz&sz=w1200'],
     categories: ['Archivo'],
-    status: 'vendido'
+    status: 'vendido',
+    curator: 'S. Core'
   },
   {
     id: '3',

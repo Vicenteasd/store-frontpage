@@ -7,4 +7,5 @@ export interface Item {
   images: string[];
   categories: string[];
   status?: 'disponible' | 'reservado' | 'vendido';
+  curator?: string;
 }
