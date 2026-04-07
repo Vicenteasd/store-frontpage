@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-card: var(--brand-card);
+  --color-brand-border: var(--brand-border);
+}
+
+:root {
+  --brand-bg: #fdfcf9;
+  --brand-ink: #1a1a1a;
+  --brand-accent: #8c7355;
+  --brand-muted: #f5f2ed;
+  --brand-card: #ffffff;
+  --brand-border: rgba(140, 115, 85, 0.1);
+}
+
+.dark {
+  --brand-bg: #0a0a0a;
+  --brand-ink: #fdfcf9;
+  --brand-accent: #c5a880;
+  --brand-muted: #1a1a1a;
+  --brand-card: #141414;
+  --brand-border: rgba(197, 168, 128, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-brand-ink font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+.glass-panel {
+  @apply bg-white/70 backdrop-blur-md border border-white/20;
+}
+
+.item-card-hover {
+  @apply transition-all duration-500 ease-out hover:-translate-y-2 hover:shadow-2xl hover:shadow-brand-accent/10;
+}
+
+@utility no-scrollbar {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
