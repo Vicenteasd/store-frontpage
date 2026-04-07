@@ -44,7 +44,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
             </h3>
           </div>
           <p className="text-lg font-serif font-semibold text-brand-accent">
-            ${item.price.toLocaleString()}
+            {item.price.toLocaleString()}€
           </p>
         </div>
         

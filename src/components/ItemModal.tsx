@@ -42,7 +42,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
           >
             <button
               onClick={onClose}
-              className="absolute right-6 top-6 z-10 rounded-full bg-brand-card/80 p-2 text-brand-ink shadow-sm backdrop-blur-md transition-colors hover:bg-brand-card"
+              className="absolute right-6 top-6 z-10 cursor-pointer rounded-full bg-brand-card/80 p-2 text-brand-ink shadow-sm backdrop-blur-md transition-colors hover:bg-brand-card"
             >
               <X size={20} />
             </button>
@@ -105,7 +105,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                 
                 <div className="mt-6 flex items-center gap-4">
                   <p className="font-serif text-3xl font-semibold text-brand-accent">
-                    ${item.price.toLocaleString()}
+                    {item.price.toLocaleString()}€
                   </p>
                   <span className="rounded-full border border-brand-accent/20 bg-brand-muted px-4 py-1 text-xs font-medium uppercase tracking-wider text-brand-accent">
                     {item.condition}
