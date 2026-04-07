@@ -9,7 +9,7 @@ export default function About() {
       className="mx-auto max-w-3xl px-6 py-24 md:px-12"
     >
       <h2 className="font-serif text-4xl font-bold text-brand-ink md:text-5xl">
-        The Archive<span className="text-brand-accent">.</span>
+        El Archivo<span className="text-brand-accent">.</span>
       </h2>
       <div className="mt-12 space-y-8 text-lg leading-relaxed text-brand-ink/70">
         <p>
@@ -25,12 +25,12 @@ export default function About() {
       
       <div className="mt-16 grid grid-cols-2 gap-12 border-t border-brand-border pt-16">
         <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Established</h4>
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Establecido</h4>
           <p className="mt-2 text-xl font-medium text-brand-ink">MMXXIV</p>
         </div>
         <div>
-          <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Location</h4>
-          <p className="mt-2 text-xl font-medium text-brand-ink">London, UK</p>
+          <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Ubicación</h4>
+          <p className="mt-2 text-xl font-medium text-brand-ink">Londres, Reino Unido</p>
         </div>
       </div>
     </motion.div>

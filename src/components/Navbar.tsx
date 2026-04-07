@@ -16,7 +16,7 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const navItems = ['Showcase', 'About', 'Contact'];
+  const navItems = ['Galería', 'Sobre mí', 'Contacto'];
 
   // Close search on Escape key
   useEffect(() => {
@@ -41,12 +41,12 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
           <motion.h1 
             whileHover={{ scale: 1.05 }}
             onClick={() => {
-              setCurrentPage('Showcase');
+              setCurrentPage('Galería');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             className="cursor-pointer font-serif text-2xl font-bold tracking-tight text-brand-ink"
           >
-            COLLECTION<span className="text-brand-accent">.</span>
+            COLECCIÓN<span className="text-brand-accent">.</span>
           </motion.h1>
           
           <div className="hidden items-center gap-8 md:flex">
@@ -78,7 +78,7 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
                     ref={searchInputRef}
                     autoFocus
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Buscar..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-[180px] rounded-full bg-brand-muted pl-4 pr-10 py-2 text-xs text-brand-ink outline-none border border-brand-border focus:border-brand-accent/30 sm:w-[240px]"

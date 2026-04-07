@@ -28,7 +28,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
         <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-card/90 px-4 py-2 text-xs font-medium text-brand-ink backdrop-blur-sm">
-            View Details <ArrowRight size={14} />
+            Ver detalles <ArrowRight size={14} />
           </span>
         </div>
       </div>

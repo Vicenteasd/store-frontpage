@@ -13,7 +13,7 @@ export default function App() {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState('Showcase');
+  const [currentPage, setCurrentPage] = useState('Galería');
 
   const categories = ['All', ...new Set(ITEMS.map((item) => item.category))];
   
@@ -35,7 +35,7 @@ export default function App() {
       
       <main className="mx-auto max-w-7xl px-6 pt-12 md:px-12">
         <AnimatePresence mode="wait">
-          {currentPage === 'Showcase' ? (
+          {currentPage === 'Galería' ? (
             <motion.div
               key="showcase"
               initial={{ opacity: 0 }}
@@ -50,15 +50,15 @@ export default function App() {
                   transition={{ duration: 0.8 }}
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-accent">
-                    Curated Selection
+                    Selección Curada
                   </p>
                   <h2 className="mt-6 font-serif text-5xl font-medium leading-tight text-brand-ink md:text-7xl">
-                    Personal <br />
-                    <span className="italic text-brand-accent/80">Collection</span>
+                    Colección <br />
+                    <span className="italic text-brand-accent/80">Personal</span>
                   </h2>
                   <p className="mt-8 text-lg leading-relaxed text-brand-ink/60">
-                    A carefully curated gallery of rare items, design icons, and vintage treasures 
-                    from my personal archives. Each piece tells a story of craftsmanship and history.
+                    Una galería cuidadosamente seleccionada de artículos raros, iconos del diseño y tesoros vintage 
+                    de mis archivos personales. Cada pieza cuenta una historia de artesanía e historia.
                   </p>
                 </motion.div>
               </header>
@@ -76,14 +76,14 @@ export default function App() {
                           : 'bg-brand-card text-brand-ink/40 hover:bg-brand-muted hover:text-brand-ink'
                       }`}
                     >
-                      {category}
+                      {category === 'All' ? 'Todos' : category}
                     </button>
                   ))}
                 </div>
                 
                 <button className="flex items-center gap-2 rounded-full border border-brand-border bg-brand-card px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-brand-ink transition-colors hover:bg-brand-muted">
                   <Filter size={14} />
-                  Filter
+                  Filtrar
                 </button>
               </div>
 
@@ -106,7 +106,7 @@ export default function App() {
               {/* Empty State */}
               {filteredItems.length === 0 && (
                 <div className="flex h-64 flex-col items-center justify-center text-center">
-                  <p className="font-serif text-2xl text-brand-ink/40">No items found in this category.</p>
+                  <p className="font-serif text-2xl text-brand-ink/40">No se encontraron artículos en esta categoría.</p>
                   <button 
                     onClick={() => {
                       setActiveCategory('All');
@@ -114,12 +114,12 @@ export default function App() {
                     }}
                     className="mt-4 text-xs font-bold uppercase tracking-widest text-brand-accent underline underline-offset-4"
                   >
-                    Clear Filters
+                    Limpiar Filtros
                   </button>
                 </div>
               )}
             </motion.div>
-          ) : currentPage === 'About' ? (
+          ) : currentPage === 'Sobre mí' ? (
             <About key="about" />
           ) : (
             <Contact key="contact" />
@@ -136,10 +136,10 @@ export default function App() {
       <footer className="mt-32 border-t border-brand-border py-16">
         <div className="mx-auto max-w-7xl px-6 text-center md:px-12">
           <h3 className="font-serif text-2xl font-medium text-brand-ink">
-            COLLECTION<span className="text-brand-accent">.</span>
+            COLECCIÓN<span className="text-brand-accent">.</span>
           </h3>
           <p className="mt-4 text-xs font-bold uppercase tracking-widest text-brand-ink/40">
-            © 2026 Curated Archives. All Rights Reserved.
+            © 2026 Archivos Curados. Todos los derechos reservados.
           </p>
           <div className="mt-8 flex justify-center gap-8">
             {['Instagram', 'Twitter', 'Pinterest'].map((social) => (

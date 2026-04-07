@@ -115,7 +115,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                 <div className="mt-10 space-y-6">
                   <div>
                     <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">
-                      Description
+                      Descripción
                     </h4>
                     <p className="mt-2 text-lg leading-relaxed text-brand-ink/70">
                       {item.description}
@@ -125,18 +125,18 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                   <div className="grid grid-cols-2 gap-8">
                     <div>
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">
-                        Condition Details
+                        Detalles del estado
                       </h4>
                       <p className="mt-2 text-sm font-medium text-brand-ink">
-                        {item.condition} - Well maintained
+                        {item.condition} - Bien mantenido
                       </p>
                     </div>
                     <div>
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">
-                        Availability
+                        Disponibilidad
                       </h4>
                       <p className="mt-2 text-sm font-medium text-green-600">
-                        In Stock
+                        En stock
                       </p>
                     </div>
                   </div>
@@ -146,7 +146,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
               <div className="mt-12">
                 <button className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-brand-ink py-5 text-sm font-semibold text-brand-bg transition-all hover:bg-brand-accent active:scale-[0.98]">
                   <ShoppingBag size={18} />
-                  Inquire About Item
+                  Consultar sobre el artículo
                   <motion.span
                     animate={{ x: [0, 5, 0] }}
                     transition={{ repeat: Infinity, duration: 1.5 }}
@@ -155,7 +155,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                   </motion.span>
                 </button>
                 <p className="mt-4 text-center text-xs text-brand-ink/40">
-                  Secure transaction via personal collection or shipping.
+                  Transacción segura mediante recogida personal o envío.
                 </p>
               </div>
             </div>

@@ -10,7 +10,7 @@ export default function Contact() {
       className="mx-auto max-w-3xl px-6 py-24 md:px-12"
     >
       <h2 className="font-serif text-4xl font-bold text-brand-ink md:text-5xl">
-        Get in Touch<span className="text-brand-accent">.</span>
+        Ponte en contacto<span className="text-brand-accent">.</span>
       </h2>
       <p className="mt-6 text-lg text-brand-ink/70">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -22,7 +22,7 @@ export default function Contact() {
             <Mail size={24} />
           </div>
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Email</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Correo electrónico</h4>
             <p className="mt-1 text-xl font-medium text-brand-ink">archives@collection.com</p>
           </div>
         </div>
@@ -32,7 +32,7 @@ export default function Contact() {
             <Phone size={24} />
           </div>
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Phone</h4>
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Teléfono</h4>
             <p className="mt-1 text-xl font-medium text-brand-ink">+44 (0) 20 7946 0123</p>
           </div>
         </div>
@@ -42,8 +42,8 @@ export default function Contact() {
             <MapPin size={24} />
           </div>
           <div>
-            <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Studio</h4>
-            <p className="mt-1 text-xl font-medium text-brand-ink">Mayfair, London</p>
+            <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">Estudio</h4>
+            <p className="mt-1 text-xl font-medium text-brand-ink">Mayfair, Londres</p>
           </div>
         </div>
       </div>
