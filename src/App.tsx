@@ -126,14 +126,23 @@ export default function App() {
                       {(['todos', 'disponible', 'reservado', 'vendido'] as const).map((status) => (
                         <button
                           key={status}
-                          onClick={() => setActiveStatus(status)}
-                          className={`cursor-pointer rounded-full border px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-all ${
+                          onClick={() => {
+                            if (status === 'todos') {
+                              setActiveStatus('todos');
+                            } else {
+                              setActiveStatus(prev => prev === status ? 'todos' : status);
+                            }
+                          }}
+                          className={`cursor-pointer flex items-center gap-2 rounded-full border px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest transition-all ${
                             activeStatus === status
                               ? 'border-brand-accent bg-brand-accent/10 text-brand-accent'
                               : 'border-brand-border bg-brand-card text-brand-ink/40 hover:border-brand-accent/50 hover:text-brand-ink'
                           }`}
                         >
                           {status}
+                          {activeStatus === status && status !== 'todos' && (
+                            <X size={10} className="opacity-60" strokeWidth={3} />
+                          )}
                         </button>
                       ))}
                     </div>
