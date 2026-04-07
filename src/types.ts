@@ -5,5 +5,5 @@ export interface Item {
   condition: 'Nuevo' | 'Como nuevo' | 'Excelente' | 'Bueno' | 'Aceptable';
   price: number;
   images: string[];
-  category: string;
+  categories: string[];
 }

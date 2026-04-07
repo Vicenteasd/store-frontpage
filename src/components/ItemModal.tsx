@@ -34,10 +34,9 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
           />
           
           <motion.div
-            layoutId={`item-${item.id}`}
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="relative grid h-full max-h-[900px] w-full max-w-6xl overflow-hidden rounded-3xl bg-brand-card shadow-2xl md:grid-cols-2"
           >
             <button
@@ -97,7 +96,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
             <div className="flex flex-col overflow-y-auto p-8 md:p-12">
               <div className="mb-auto">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-                  {item.category}
+                  {item.categories.join(' • ')}
                 </p>
                 <h2 className="mt-4 font-serif text-4xl font-medium leading-tight text-brand-ink md:text-5xl">
                   {item.title}
@@ -148,8 +147,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                   <ShoppingBag size={18} />
                   Consultar sobre el artículo
                   <motion.span
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    initial={{ opacity: 1 }}
                   >
                     <ArrowRight size={16} />
                   </motion.span>

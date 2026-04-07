@@ -11,18 +11,31 @@ import { Filter } from 'lucide-react';
 
 export default function App() {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
-  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [activeCategories, setActiveCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState('Galería');
 
-  const categories = ['All', ...new Set(ITEMS.map((item) => item.category))];
+  const categories = [...new Set(ITEMS.flatMap((item) => item.categories))];
   
   const filteredItems = ITEMS.filter((item) => {
-    const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
+    const matchesCategory = activeCategories.length === 0 || 
+                           item.categories.some(cat => activeCategories.includes(cat));
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
                          item.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  const toggleCategory = (category: string) => {
+    if (category === 'All') {
+      setActiveCategories([]);
+    } else {
+      setActiveCategories(prev => 
+        prev.includes(category) 
+          ? prev.filter(c => c !== category)
+          : [...prev, category]
+      );
+    }
+  };
 
   return (
     <div className="min-h-screen bg-brand-bg pb-24">
@@ -45,8 +58,8 @@ export default function App() {
               {/* Hero Section */}
               <header className="mb-16 max-w-2xl">
                 <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.8 }}
                 >
                   <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-accent">
@@ -66,17 +79,27 @@ export default function App() {
               {/* Filters */}
               <div className="mb-12 flex flex-wrap items-center justify-between gap-6">
                 <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+                  <button
+                    onClick={() => toggleCategory('All')}
+                    className={`whitespace-nowrap rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
+                      activeCategories.length === 0
+                        ? 'bg-brand-ink text-brand-bg shadow-lg shadow-brand-ink/20'
+                        : 'bg-brand-card text-brand-ink/40 hover:bg-brand-muted hover:text-brand-ink'
+                    }`}
+                  >
+                    Todos
+                  </button>
                   {categories.map((category) => (
                     <button
                       key={category}
-                      onClick={() => setActiveCategory(category)}
+                      onClick={() => toggleCategory(category)}
                       className={`whitespace-nowrap rounded-full px-6 py-2 text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
-                        activeCategory === category
+                        activeCategories.includes(category)
                           ? 'bg-brand-ink text-brand-bg shadow-lg shadow-brand-ink/20'
                           : 'bg-brand-card text-brand-ink/40 hover:bg-brand-muted hover:text-brand-ink'
                       }`}
                     >
-                      {category === 'All' ? 'Todos' : category}
+                      {category}
                     </button>
                   ))}
                 </div>
@@ -89,7 +112,6 @@ export default function App() {
 
               {/* Grid */}
               <motion.div 
-                layout
                 className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3"
               >
                 <AnimatePresence mode="popLayout">
@@ -109,7 +131,7 @@ export default function App() {
                   <p className="font-serif text-2xl text-brand-ink/40">No se encontraron artículos en esta categoría.</p>
                   <button 
                     onClick={() => {
-                      setActiveCategory('All');
+                      setActiveCategories([]);
                       setSearchQuery('');
                     }}
                     className="mt-4 text-xs font-bold uppercase tracking-widest text-brand-accent underline underline-offset-4"

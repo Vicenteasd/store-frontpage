@@ -11,10 +11,9 @@ interface ItemCardProps {
 export default function ItemCard({ item, onClick }: ItemCardProps) {
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -8 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className="group cursor-pointer bg-brand-card overflow-hidden rounded-2xl border border-brand-border shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-brand-accent/5"
       onClick={onClick}
     >
@@ -26,7 +25,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-        <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+        <div className="absolute bottom-4 left-4 right-4 opacity-0 transition-all duration-500 group-hover:opacity-100">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-card/90 px-4 py-2 text-xs font-medium text-brand-ink backdrop-blur-sm">
             Ver detalles <ArrowRight size={14} />
           </span>
@@ -37,7 +36,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
         <div className="flex items-start justify-between gap-2">
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-widest text-brand-accent/60">
-              {item.category}
+              {item.categories.join(' • ')}
             </p>
             <h3 className="mt-1 text-xl font-medium leading-tight text-brand-ink">
               {item.title}
