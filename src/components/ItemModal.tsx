@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Item } from '../types';
 import { X, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface ItemModalProps {
   item: Item | null;
@@ -10,6 +10,17 @@ interface ItemModalProps {
 
 export default function ItemModal({ item, onClose }: ItemModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    if (item) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [item]);
 
   if (!item) return null;
 
@@ -98,7 +109,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
                   {item.categories.join(' • ')}
                 </p>
-                <h2 className="mt-4 font-serif text-4xl font-medium leading-tight text-brand-ink md:text-5xl">
+                <h2 className="mt-4 break-words font-serif text-4xl font-medium leading-tight text-brand-ink md:text-5xl">
                   {item.title}
                 </h2>
                 
