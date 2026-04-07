@@ -25,6 +25,17 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+        
+        {item.status && item.status !== 'disponible' && (
+          <div className={`absolute bottom-4 right-4 z-10 rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-widest shadow-sm backdrop-blur-[4px] ${
+            item.status === 'reservado' 
+              ? 'bg-brand-muted/90 text-brand-accent border-brand-accent/30' 
+              : 'bg-brand-ink/90 text-brand-bg border-brand-bg/20'
+          }`}>
+            {item.status}
+          </div>
+        )}
+
         <div className="absolute bottom-4 left-4 right-4 opacity-0 transition-all duration-500 group-hover:opacity-100">
           <span className="inline-flex items-center gap-2 rounded-full bg-brand-card/90 px-4 py-2 text-xs font-medium text-brand-ink backdrop-blur-sm">
             Ver detalles <ArrowRight size={14} />

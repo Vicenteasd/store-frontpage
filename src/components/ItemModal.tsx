@@ -145,8 +145,12 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                       <h4 className="text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">
                         Disponibilidad
                       </h4>
-                      <p className="mt-2 text-sm font-medium text-green-600">
-                        En stock
+                      <p className={`mt-2 text-sm font-medium ${
+                        item.status === 'vendido' ? 'text-brand-ink' : 
+                        item.status === 'reservado' ? 'text-brand-accent' : 
+                        'text-green-600'
+                      }`}>
+                        {item.status ? item.status.charAt(0).toUpperCase() + item.status.slice(1) : 'Disponible'}
                       </p>
                     </div>
                   </div>

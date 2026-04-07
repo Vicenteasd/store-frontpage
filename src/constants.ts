@@ -8,7 +8,8 @@ export const ITEMS: Item[] = [
     condition: 'Excelente',
     price: 0,
     images: ['https://drive.google.com/thumbnail?id=1fTr3a7Z53_j6i_slcgY8jCUH6-bcJZUv&sz=w1200'],
-    categories: ['Archivo', 'Pokemon']
+    categories: ['Archivo', 'Pokemon'],
+    status: 'reservado'
   },
   {
     id: '2',
@@ -17,7 +18,8 @@ export const ITEMS: Item[] = [
     condition: 'Excelente',
     price: 0,
     images: ['https://drive.google.com/thumbnail?id=1HDmc7jd4aE0KIHKXRpHoOYjzUbiaj-iz&sz=w1200'],
-    categories: ['Archivo']
+    categories: ['Archivo'],
+    status: 'vendido'
   },
   {
     id: '3',

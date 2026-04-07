@@ -6,4 +6,5 @@ export interface Item {
   price: number;
   images: string[];
   categories: string[];
+  status?: 'disponible' | 'reservado' | 'vendido';
 }
