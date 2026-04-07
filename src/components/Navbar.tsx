@@ -6,15 +6,17 @@ import { useTheme } from '../context/ThemeContext';
 interface NavbarProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  currentPage: string;
+  setCurrentPage: (page: string) => void;
 }
 
-export default function Navbar({ searchQuery, setSearchQuery }: NavbarProps) {
+export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCurrentPage }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const navItems = ['Showcase', 'Categories', 'About', 'Contact'];
+  const navItems = ['Showcase', 'About', 'Contact'];
 
   // Close search on Escape key
   useEffect(() => {
@@ -38,7 +40,10 @@ export default function Navbar({ searchQuery, setSearchQuery }: NavbarProps) {
         <div className="flex items-center gap-12">
           <motion.h1 
             whileHover={{ scale: 1.05 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              setCurrentPage('Showcase');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             className="cursor-pointer font-serif text-2xl font-bold tracking-tight text-brand-ink"
           >
             COLLECTION<span className="text-brand-accent">.</span>
@@ -46,13 +51,15 @@ export default function Navbar({ searchQuery, setSearchQuery }: NavbarProps) {
           
           <div className="hidden items-center gap-8 md:flex">
             {navItems.map((item) => (
-              <a
+              <button
                 key={item}
-                href="#"
-                className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-ink/40 transition-colors hover:text-brand-accent"
+                onClick={() => setCurrentPage(item)}
+                className={`cursor-pointer text-[10px] font-bold uppercase tracking-[0.2em] transition-colors hover:text-brand-accent ${
+                  currentPage === item ? 'text-brand-accent' : 'text-brand-ink/40'
+                }`}
               >
                 {item}
-              </a>
+              </button>
             ))}
           </div>
         </div>
@@ -65,7 +72,7 @@ export default function Navbar({ searchQuery, setSearchQuery }: NavbarProps) {
                   initial={{ width: 0, opacity: 0 }}
                   animate={{ width: 'auto', opacity: 1 }}
                   exit={{ width: 0, opacity: 0 }}
-                  className="overflow-hidden"
+                  className="relative flex items-center overflow-hidden"
                 >
                   <input
                     ref={searchInputRef}
@@ -74,8 +81,21 @@ export default function Navbar({ searchQuery, setSearchQuery }: NavbarProps) {
                     placeholder="Search..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-[140px] rounded-full bg-brand-muted px-4 py-2 text-xs text-brand-ink outline-none border border-brand-border focus:border-brand-accent/30 sm:w-[240px]"
+                    className="w-[180px] rounded-full bg-brand-muted pl-4 pr-10 py-2 text-xs text-brand-ink outline-none border border-brand-border focus:border-brand-accent/30 sm:w-[240px]"
                   />
+                  <AnimatePresence>
+                    {searchQuery && (
+                      <motion.button
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-3 cursor-pointer text-brand-ink/40 hover:text-brand-accent"
+                      >
+                        <X size={14} />
+                      </motion.button>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -120,14 +140,18 @@ export default function Navbar({ searchQuery, setSearchQuery }: NavbarProps) {
           >
             <div className="flex flex-col gap-6 p-8">
               {navItems.map((item) => (
-                <a
+                <button
                   key={item}
-                  href="#"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-sm font-bold uppercase tracking-[0.2em] text-brand-ink/60 transition-colors hover:text-brand-accent"
+                  onClick={() => {
+                    setCurrentPage(item);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className={`text-left text-sm font-bold uppercase tracking-[0.2em] transition-colors hover:text-brand-accent ${
+                    currentPage === item ? 'text-brand-accent' : 'text-brand-ink/60'
+                  }`}
                 >
                   {item}
-                </a>
+                </button>
               ))}
             </div>
           </motion.div>
