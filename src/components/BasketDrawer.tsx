@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ShoppingBasket, X, Plus, Minus, Trash2 } from 'lucide-react';
 import { useBasket } from '../context/BasketContext';
+import { CONFIG } from '../config';
 
 interface BasketDrawerProps {
   isOpen: boolean;
@@ -13,15 +14,22 @@ export default function BasketDrawer({ isOpen, onClose }: BasketDrawerProps) {
   const [isOrdered, setIsOrdered] = useState(false);
 
   const handleCheckout = () => {
-    // Simulate order process
+    const message = `Hi! I'm interested in these ${totalItems} items:\n\n` +
+      items.map(item => `- ${item.title} (${item.price.toLocaleString()}€)`).join('\n') +
+      `\n\nTotal: ${totalPrice.toLocaleString()}€`;
+
+    const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank');
+
+    // Simulate order process state
+    setIsOrdered(true);
     setTimeout(() => {
-      setIsOrdered(true);
-      setTimeout(() => {
-        clearBasket();
-        setIsOrdered(false);
-        onClose();
-      }, 3000);
-    }, 500);
+      clearBasket();
+      setIsOrdered(false);
+      onClose();
+    }, 3000);
   };
 
   return (

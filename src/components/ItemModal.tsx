@@ -3,6 +3,7 @@ import { Item } from '../types';
 import { X, ChevronLeft, ChevronRight, ShoppingBag, ShoppingBasket } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { useBasket } from '../context/BasketContext';
+import { CONFIG } from '../config';
 
 interface ItemModalProps {
   item: Item | null;
@@ -16,6 +17,13 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
   const inBasket = item ? isInBasket(item.id) : false;
 
   const handleConsult = () => {
+    if (!item) return;
+
+    const message = `Hi! I'm interested in this item: ${item.title} (${item.price.toLocaleString()}€)`;
+    const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
+
     setIsConsulted(true);
     setTimeout(() => {
       setIsConsulted(false);
