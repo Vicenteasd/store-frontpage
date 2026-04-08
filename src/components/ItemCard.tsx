@@ -14,7 +14,7 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="group cursor-pointer bg-brand-card overflow-hidden rounded-2xl border border-brand-border shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-brand-accent/5"
+      className="group relative cursor-pointer bg-brand-card overflow-hidden rounded-2xl border border-brand-border shadow-sm transition-all duration-500 hover:shadow-xl hover:shadow-brand-accent/5"
       onClick={onClick}
     >
       <div className="relative aspect-[4/5] overflow-hidden">

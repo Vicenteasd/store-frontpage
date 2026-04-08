@@ -5,12 +5,14 @@ import { Item } from './types';
 import Navbar from './components/Navbar';
 import ItemCard from './components/ItemCard';
 import ItemModal from './components/ItemModal';
+import BasketDrawer from './components/BasketDrawer';
 import About from './components/About';
 import Contact from './components/Contact';
 import { Filter, X } from 'lucide-react';
 
 export default function App() {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+  const [isBasketOpen, setIsBasketOpen] = useState(false);
   const [activeCategories, setActiveCategories] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState('Galería');
@@ -53,6 +55,7 @@ export default function App() {
         setSearchQuery={setSearchQuery} 
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        onOpenBasket={() => setIsBasketOpen(true)}
       />
       
       <main className="mx-auto max-w-7xl px-6 pt-12 md:px-12">
@@ -192,6 +195,11 @@ export default function App() {
       <ItemModal
         item={selectedItem}
         onClose={() => setSelectedItem(null)}
+      />
+
+      <BasketDrawer 
+        isOpen={isBasketOpen}
+        onClose={() => setIsBasketOpen(false)}
       />
 
       {/* Footer */}

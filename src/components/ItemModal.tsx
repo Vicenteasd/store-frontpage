@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { Item } from '../types';
-import { X, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ShoppingBag, ShoppingBasket } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { useBasket } from '../context/BasketContext';
 
 interface ItemModalProps {
   item: Item | null;
@@ -9,7 +10,17 @@ interface ItemModalProps {
 }
 
 export default function ItemModal({ item, onClose }: ItemModalProps) {
+  const { addToBasket, isInBasket } = useBasket();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isConsulted, setIsConsulted] = useState(false);
+  const inBasket = item ? isInBasket(item.id) : false;
+
+  const handleConsult = () => {
+    setIsConsulted(true);
+    setTimeout(() => {
+      setIsConsulted(false);
+    }, 3000);
+  };
 
   useEffect(() => {
     if (item) {
@@ -157,15 +168,44 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                 </div>
               </div>
 
-              <div className="mt-12">
-                <button className="group flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl bg-brand-ink py-5 text-sm font-semibold text-brand-bg transition-all hover:bg-brand-accent active:scale-[0.98]">
-                  <ShoppingBag size={18} />
-                  Consultar sobre el artículo
-                  <motion.span
-                    initial={{ opacity: 1 }}
-                  >
-                    <ArrowRight size={16} />
-                  </motion.span>
+              <div className="mt-12 space-y-4">
+                <button 
+                  onClick={() => item && addToBasket(item)}
+                  disabled={inBasket}
+                  className={`group flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl py-5 text-sm font-semibold transition-all active:scale-[0.98] ${
+                    inBasket 
+                      ? 'bg-brand-muted text-brand-accent cursor-default' 
+                      : 'bg-brand-accent text-white hover:bg-brand-accent/90'
+                  }`}
+                >
+                  <ShoppingBasket size={18} />
+                  {inBasket ? 'En la cesta' : 'Añadir a la cesta'}
+                </button>
+                <button 
+                  onClick={handleConsult}
+                  disabled={isConsulted}
+                  className={`group flex w-full cursor-pointer items-center justify-center gap-3 rounded-2xl py-5 text-sm font-semibold transition-all active:scale-[0.98] ${
+                    isConsulted 
+                      ? 'bg-green-500 text-white' 
+                      : 'bg-brand-ink text-brand-bg hover:bg-brand-accent'
+                  }`}
+                >
+                  {isConsulted ? (
+                    <>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                      Consulta enviada
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingBag size={18} />
+                      Consultar sobre el artículo
+                      <motion.span initial={{ opacity: 1 }}>
+                        <ArrowRight size={16} />
+                      </motion.span>
+                    </>
+                  )}
                 </button>
                 <p className="mt-4 text-center text-xs text-brand-ink/40">
                   Transacción segura mediante recogida personal o envío.

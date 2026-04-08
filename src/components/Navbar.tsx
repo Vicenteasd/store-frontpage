@@ -1,17 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Search, Menu, Sun, Moon, X } from 'lucide-react';
+import { Search, Menu, Sun, Moon, X, ShoppingBasket } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { useBasket } from '../context/BasketContext';
 
 interface NavbarProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   currentPage: string;
   setCurrentPage: (page: string) => void;
+  onOpenBasket: () => void;
 }
 
-export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCurrentPage }: NavbarProps) {
+export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCurrentPage, onOpenBasket }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
+  const { totalItems } = useBasket();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -118,6 +121,26 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
             aria-label="Toggle theme"
           >
             {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+
+          <button 
+            onClick={onOpenBasket}
+            className="group relative cursor-pointer text-brand-ink/60 transition-colors hover:text-brand-accent"
+            aria-label="Open basket"
+          >
+            <ShoppingBasket size={20} />
+            <AnimatePresence>
+              {totalItems > 0 && (
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  className="absolute -right-2 -top-2 flex h-4 w-4 items-center justify-center rounded-full bg-brand-accent text-[8px] font-bold text-white"
+                >
+                  {totalItems}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
           
           <button 
