@@ -19,7 +19,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
   const handleConsult = () => {
     if (!item) return;
 
-    const message = `Hi! I'm interested in this item: ${item.title} (${item.price.toLocaleString()}€)`;
+    const message = `Hi! I'm interested in this item: ${item.title} (${item.price.toLocaleString()}€). Could you please provide more pictures or information about it?`;
     const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
     
     window.open(whatsappUrl, '_blank');

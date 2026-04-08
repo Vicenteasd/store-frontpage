@@ -39,8 +39,8 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
       animate={{ y: 0 }}
       className="sticky top-0 z-40 w-full bg-brand-bg/80 backdrop-blur-xl"
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 md:px-12">
-        <div className="flex items-center gap-12">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 md:px-12 md:py-6">
+        <div className="flex items-center gap-4 md:gap-12">
           <motion.h1 
             whileHover={{ scale: 1.05 }}
             onClick={() => {
@@ -67,7 +67,7 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
           </div>
         </div>
 
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <div className="relative flex items-center">
             <AnimatePresence>
               {isSearchOpen && (
@@ -84,7 +84,7 @@ export default function Navbar({ searchQuery, setSearchQuery, currentPage, setCu
                     placeholder="Buscar..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-[180px] rounded-full bg-brand-muted pl-4 pr-10 py-2 text-xs text-brand-ink outline-none border border-brand-border focus:border-brand-accent/30 sm:w-[240px]"
+                    className="w-[120px] rounded-full bg-brand-muted pl-3 pr-8 py-1.5 text-[10px] text-brand-ink outline-none border border-brand-border focus:border-brand-accent/30 xs:w-[160px] sm:w-[240px]"
                   />
                   <AnimatePresence>
                     {searchQuery && (

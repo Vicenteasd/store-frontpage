@@ -32,6 +32,11 @@
 }
 
 @layer base {
+  html, body {
+    @apply overflow-x-hidden;
+    width: 100%;
+  }
+
   body {
     @apply bg-brand-bg text-brand-ink font-sans antialiased;
   }

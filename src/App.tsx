@@ -49,7 +49,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-bg pb-24">
+    <div className="min-h-screen bg-brand-bg pb-24 overflow-x-hidden">
       <Navbar 
         searchQuery={searchQuery} 
         setSearchQuery={setSearchQuery} 
@@ -77,7 +77,7 @@ export default function App() {
                   <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-accent">
                     Selección Curada
                   </p>
-                  <h2 className="mt-6 font-serif text-5xl font-medium leading-tight text-brand-ink md:text-7xl">
+                  <h2 className="mt-6 font-serif text-4xl font-medium leading-tight text-brand-ink xs:text-5xl md:text-7xl">
                     Colección <br />
                     <span className="italic text-brand-accent/80">Personal</span>
                   </h2>
@@ -121,11 +121,11 @@ export default function App() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 border-t border-brand-border pt-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 border-t border-brand-border pt-6">
                     <span className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-ink/40">
                       <Filter size={12} /> Estado:
                     </span>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       {(['todos', 'disponible', 'reservado', 'vendido'] as const).map((status) => (
                         <button
                           key={status}
