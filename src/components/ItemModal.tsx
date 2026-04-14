@@ -85,6 +85,7 @@ export default function ItemModal({ item, onClose }: ItemModalProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
+                  style={{ rotate: item.rotation || 0 }}
                   src={item.images[currentImageIndex]}
                   alt={`${item.title} - Image ${currentImageIndex + 1}`}
                   className="h-full w-full object-cover"

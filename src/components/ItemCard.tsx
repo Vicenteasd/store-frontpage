@@ -18,9 +18,10 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
       onClick={onClick}
     >
       <div className="relative aspect-[4/5] overflow-hidden">
-        <img
+        <motion.img
           src={item.images[0]}
           alt={item.title}
+          style={{ rotate: item.rotation || 0 }}
           className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
           referrerPolicy="no-referrer"
         />

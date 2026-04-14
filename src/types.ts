@@ -8,4 +8,5 @@ export interface Item {
   categories: string[];
   status?: 'disponible' | 'reservado' | 'vendido';
   curator?: string;
+  rotation?: number;
 }
